@@ -32,6 +32,10 @@ const menus = [
     name: 'Contact',
     path: '/contact',
   },
+  {
+    name: 'Organizer Dashboard',
+    path: '/dashboard',
+  },
 ]
 
 const handleScroll = () => {
