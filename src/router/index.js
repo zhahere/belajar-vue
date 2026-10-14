@@ -55,15 +55,15 @@ const routes = [
       },
     ],
   },
-
   {
     path: '/dashboard',
     component: DashboardLayout,
     children: [
       {
         path: '',
-        name: 'dashboard',
+        name: 'Organizer Dashboard',
         component: Dashboard,
+        meta: { breadcrumb: 'Dashboard' },
       },
     ],
   },

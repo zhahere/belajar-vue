@@ -3,17 +3,22 @@ import { RouterView, RouterLink } from 'vue-router'
 </script>
 
 <template>
-  <!-- RAIL & PANE SYSTEM -->
-  <!-- Kerangka khusus untuk kebutuhan produktivitas/pengelolaan aplikasi -->
   <div class="dashboard-layout">
-    <!-- RAIL: Navigasi samping yang posisinya terkunci (fixed) -->
+    <!-- Sidebar -->
     <aside class="dashboard-rail">
       <div class="rail-brand">
-        <router-link to="/">Gatherly Organizer</router-link>
+        <RouterLink to="/">Gatherly Organizer</RouterLink>
       </div>
 
       <nav class="rail-nav">
-        <router-link to="/dashboard" class="rail-link active"> Overview </router-link>
+        <RouterLink
+          to="/dashboard"
+          class="rail-link"
+          active-class="active"
+          exact-active-class="active"
+        >
+          Overview
+        </RouterLink>
 
         <a href="#" class="rail-link">My Events</a>
         <a href="#" class="rail-link">Attendees</a>
@@ -21,11 +26,11 @@ import { RouterView, RouterLink } from 'vue-router'
       </nav>
 
       <div class="rail-footer">
-        <router-link to="/" class="rail-link"> &larr; Back to Public </router-link>
+        <RouterLink to="/" class="rail-link"> &larr; Back to Public </RouterLink>
       </div>
     </aside>
 
-    <!-- PANE: Area utama dinamis tempat konten berubah -->
+    <!-- Konten dashboard -->
     <main class="dashboard-pane">
       <header class="pane-header">
         <h1>Dashboard</h1>
@@ -42,14 +47,15 @@ import { RouterView, RouterLink } from 'vue-router'
 <style scoped>
 .dashboard-layout {
   display: flex;
+  width: 100%;
   height: 100vh;
   overflow: hidden;
   background-color: var(--bg-gray);
 }
 
-/* RAIL STYLES */
 .dashboard-rail {
-  width: 260px;
+  flex: 0 0 250px;
+  width: 250px;
   background-color: #1c1948;
   color: white;
   display: flex;
@@ -57,8 +63,8 @@ import { RouterView, RouterLink } from 'vue-router'
 }
 
 .rail-brand {
-  padding: var(--space-6);
-  font-size: 1.2rem;
+  padding: 16px;
+  font-size: 1rem;
   font-weight: 700;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -70,44 +76,48 @@ import { RouterView, RouterLink } from 'vue-router'
 
 .rail-nav {
   flex: 1;
-  padding: var(--space-6) 0;
+  padding: 12px 0;
   display: flex;
   flex-direction: column;
 }
 
 .rail-link {
-  padding: var(--space-3) var(--space-6);
+  display: block;
+  padding: 10px 16px;
   color: #aaa;
   text-decoration: none;
+  font-size: 0.9rem;
   font-weight: 500;
+  border-left: 4px solid transparent;
   transition:
-    background 0.2s,
+    background-color 0.2s,
     color 0.2s;
 }
 
 .rail-link:hover,
 .rail-link.active {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: rgba(255, 255, 255, 0.08);
   color: white;
-  border-left: 4px solid var(--primary);
+  border-left-color: var(--primary);
 }
 
 .rail-footer {
-  padding: var(--space-6);
+  padding: 12px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* PANE STYLES */
 .dashboard-pane {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
 }
 
 .pane-header {
+  flex-shrink: 0;
   background: white;
-  padding: var(--space-4) var(--space-8);
+  padding: 16px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -115,11 +125,28 @@ import { RouterView, RouterLink } from 'vue-router'
 }
 
 .pane-header h1 {
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   margin: 0;
 }
 
+.user-profile {
+  font-size: 0.85rem;
+}
+
 .pane-content {
-  padding: var(--space-8);
+  flex: 1;
+  padding: 24px;
+  overflow-x: auto;
+}
+
+@media (max-width: 768px) {
+  .dashboard-rail {
+    flex-basis: 160px;
+    width: 160px;
+  }
+
+  .pane-content {
+    padding: 16px;
+  }
 }
 </style>
