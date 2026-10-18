@@ -3,34 +3,30 @@ import { RouterView, RouterLink } from 'vue-router'
 </script>
 
 <template>
+  <!-- RAIL & PANE SYSTEM -->
+  <!-- Kerangka khusus untuk kebutuhan produktivitas/pengelolaan aplikasi -->
   <div class="dashboard-layout">
-    <!-- Sidebar -->
+    <!-- RAIL: Navigasi samping yang posisinya terkunci (Fixed) -->
     <aside class="dashboard-rail">
       <div class="rail-brand">
         <RouterLink to="/">Gatherly Organizer</RouterLink>
       </div>
 
       <nav class="rail-nav">
-        <RouterLink
-          to="/dashboard"
-          class="rail-link"
-          active-class="active"
-          exact-active-class="active"
-        >
-          Overview
+        <RouterLink to="/dashboard" class="rail-link" exact-active-class="active">
+          Dashboard
         </RouterLink>
-
-        <a href="#" class="rail-link">My Events</a>
-        <a href="#" class="rail-link">Attendees</a>
-        <a href="#" class="rail-link">QR Check-in</a>
+        <RouterLink to="/dashboard/events" class="rail-link" active-class="active">
+          Event Management
+        </RouterLink>
       </nav>
 
       <div class="rail-footer">
-        <RouterLink to="/" class="rail-link"> &larr; Back to Public </RouterLink>
+        <RouterLink to="/" class="rail-link">&larr; Back to Public</RouterLink>
       </div>
     </aside>
 
-    <!-- Konten dashboard -->
+    <!-- PANE: Area utama dinamis tempat konten berubah dan bisa di-scroll secara mandiri -->
     <main class="dashboard-pane">
       <header class="pane-header">
         <h1>Dashboard</h1>
@@ -45,17 +41,20 @@ import { RouterView, RouterLink } from 'vue-router'
 </template>
 
 <style scoped>
+/*
+  Full-screen app layout (khas dashboard).
+  Tinggi dibatasi 100vh agar bagian rail tidak terguyur ke atas saat pane di-scroll.
+*/
 .dashboard-layout {
   display: flex;
-  width: 100%;
   height: 100vh;
   overflow: hidden;
   background-color: var(--bg-gray);
 }
 
+/* RAIL STYLES */
 .dashboard-rail {
-  flex: 0 0 250px;
-  width: 250px;
+  width: 260px;
   background-color: #1c1948;
   color: white;
   display: flex;
@@ -63,8 +62,8 @@ import { RouterView, RouterLink } from 'vue-router'
 }
 
 .rail-brand {
-  padding: 16px;
-  font-size: 1rem;
+  padding: var(--space-6);
+  font-size: 1.2rem;
   font-weight: 700;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -76,48 +75,44 @@ import { RouterView, RouterLink } from 'vue-router'
 
 .rail-nav {
   flex: 1;
-  padding: 12px 0;
+  padding: var(--space-6) 0;
   display: flex;
   flex-direction: column;
 }
 
 .rail-link {
-  display: block;
-  padding: 10px 16px;
-  color: #aaa;
+  padding: var(--space-3) var(--space-6);
+  color: #a0a0bb;
   text-decoration: none;
-  font-size: 0.9rem;
   font-weight: 500;
-  border-left: 4px solid transparent;
   transition:
-    background-color 0.2s,
+    background 0.2s,
     color 0.2s;
 }
 
 .rail-link:hover,
 .rail-link.active {
-  background-color: rgba(255, 255, 255, 0.08);
+  background-color: rgba(255, 255, 255, 0.05);
   color: white;
-  border-left-color: var(--primary);
+  border-left: 4px solid var(--primary);
 }
 
 .rail-footer {
-  padding: 12px 0;
+  padding: var(--space-6);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* PANE STYLES */
 .dashboard-pane {
   flex: 1;
-  min-width: 0;
   display: flex;
   flex-direction: column;
   overflow-y: auto;
 }
 
 .pane-header {
-  flex-shrink: 0;
   background: white;
-  padding: 16px 24px;
+  padding: var(--space-4) var(--space-8);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -125,28 +120,11 @@ import { RouterView, RouterLink } from 'vue-router'
 }
 
 .pane-header h1 {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   margin: 0;
 }
 
-.user-profile {
-  font-size: 0.85rem;
-}
-
 .pane-content {
-  flex: 1;
-  padding: 24px;
-  overflow-x: auto;
-}
-
-@media (max-width: 768px) {
-  .dashboard-rail {
-    flex-basis: 160px;
-    width: 160px;
-  }
-
-  .pane-content {
-    padding: 16px;
-  }
+  padding: var(--space-8);
 }
 </style>
