@@ -15,27 +15,13 @@ const menus = [
       {
         name: 'Event List',
         path: '/browse/events',
-        children: [
-          {
-            name: 'Event Detail (Sample)',
-            path: '/browse/events/1',
-          },
-        ],
       },
-      {
-        name: 'Category',
-        path: '/browse/category',
-      },
+      { name: 'Category', path: '/browse/category' },
+      { name: 'Your Events', path: '/browse/your-events' },
     ],
   },
-  {
-    name: 'Contact',
-    path: '/contact',
-  },
-  {
-    name: 'Organizer Dashboard',
-    path: '/dashboard',
-  },
+  { name: 'Contact', path: '/contact' },
+  { name: 'Organizer Dashboard', path: '/dashboard' },
 ]
 
 const handleScroll = () => {
@@ -64,7 +50,6 @@ onUnmounted(() => {
           class="logo-icon"
         >
           <path d="M12 0L22.3923 6V18L12 24L1.6077 18V6L12 0Z" fill="white" />
-
           <path
             d="M15 9.5 C15 9.5 14 8 12 8 C9.5 8 8 10 8 12.5 C8 15 9.5 17 12 17 C14 17 15 16 15.5 14.5 V 12.5 H 12.5"
             stroke="#1A1643"
@@ -73,7 +58,6 @@ onUnmounted(() => {
             stroke-linejoin="round"
           />
         </svg>
-
         <span class="logo-text">Gatherly</span>
       </router-link>
 
@@ -88,7 +72,6 @@ onUnmounted(() => {
             }"
           >
             {{ menu.name }}
-
             <svg
               v-if="menu.children"
               class="dropdown-indicator"
@@ -110,7 +93,6 @@ onUnmounted(() => {
             <li v-for="child in menu.children" :key="child.name" class="dropdown-item">
               <router-link :to="child.path" class="dropdown-link">
                 {{ child.name }}
-
                 <svg
                   v-if="child.children"
                   class="submenu-indicator"
@@ -127,7 +109,7 @@ onUnmounted(() => {
                 </svg>
               </router-link>
 
-              <!-- Second Level Dropdown -->
+              <!-- Second Level Dropdown (Submenu) -->
               <ul v-if="child.children" class="submenu">
                 <li v-for="subchild in child.children" :key="subchild.name" class="submenu-item">
                   <router-link :to="subchild.path" class="dropdown-link">
@@ -158,9 +140,7 @@ onUnmounted(() => {
               d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
             ></path>
           </svg>
-
           <span class="lang-text">EN</span>
-
           <svg
             width="18"
             height="18"
@@ -271,7 +251,7 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   height: 100%;
-  padding: 1rem 0;
+  padding: 1rem 0; /* Memberi ruang hover */
 }
 
 .nav-link {
@@ -311,14 +291,17 @@ onUnmounted(() => {
   transform: rotate(180deg);
 }
 
-/* DROPDOWN & SUBMENU STYLES */
-
+/* =========================================
+   DROPDOWN & SUBMENU STYLES
+   Inspired by user reference image
+   ========================================= */
 .dropdown-menu {
-  display: none;
+  display: none; /* diubah jadi block saat hover */
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #d8d8d8;
+
+  background-color: #d8d8d8; /* warna abu seperti referensi */
   min-width: 200px;
   list-style: none;
   padding: 0;
@@ -327,13 +310,14 @@ onUnmounted(() => {
   border-radius: 4px;
 }
 
+/* Tampilkan dropdown Level 1 saat nav-item di-hover */
 .nav-item:hover .dropdown-menu {
   display: block;
   animation: fadeIn 0.2s ease-out;
 }
 
 .dropdown-item {
-  position: relative;
+  position: relative; /* relative untuk submenu absolut */
 }
 
 .dropdown-link {
@@ -342,7 +326,7 @@ onUnmounted(() => {
   align-items: center;
   padding: 12px 20px;
   text-decoration: none;
-  color: #333;
+  color: #333; /* text gelap */
   font-size: 0.95rem;
   transition:
     background-color 0.2s,
@@ -351,16 +335,16 @@ onUnmounted(() => {
 }
 
 .dropdown-link:hover {
-  background-color: #c4c4c4;
+  background-color: #c4c4c4; /* efek hover lebih gelap sedikit */
   color: #000;
 }
 
+/* Hilangkan border bawah pada item terakhir */
 .dropdown-item:last-child .dropdown-link {
   border-bottom: none;
 }
 
-/* Submenu Level 2 */
-
+/* Submenu (Level 2) */
 .submenu {
   display: none;
   position: absolute;
@@ -375,6 +359,7 @@ onUnmounted(() => {
   border-radius: 4px;
 }
 
+/* Tampilkan submenu Level 2 saat dropdown-item di-hover */
 .dropdown-item:hover .submenu {
   display: block;
   animation: fadeIn 0.2s ease-out;
@@ -385,15 +370,19 @@ onUnmounted(() => {
     opacity: 0;
     transform: translateY(-5px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* RIGHT SECTION */
+/* Submenu pada parent (jika left:100% terlalu mentok layar)
+   Kita bisa membiarkannya default left 100%.
+*/
 
+/* =========================================
+   RIGHT SECTION
+   ========================================= */
 .nav-right {
   display: flex;
   align-items: center;
@@ -455,7 +444,6 @@ onUnmounted(() => {
   .nav-menu {
     display: none;
   }
-
   .lang-selector {
     display: none;
   }
